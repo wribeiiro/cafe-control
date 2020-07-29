@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 /**
- *Class Email
+ * Class Email
  *
  * @author Rafael Soje <rafaelsoje@gmail.com>
  * @package Source\Core

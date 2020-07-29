@@ -5,7 +5,7 @@ namespace Source\Models;
 use Source\Core\Model;
 
 /**
- *Class User Active Record Pattern
+ * Class User Active Record Pattern
  *
  * @author Rafael Soje <rafaelsoje@gmail.com>
  * @package Source\Models

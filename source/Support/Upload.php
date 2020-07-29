@@ -7,7 +7,7 @@ use CoffeeCode\Uploader\Image;
 use CoffeeCode\Uploader\Media;
 
 /**
- *Class Upload
+ * Class Upload
  *
  * @author Rafael Soje <rafaelsoje@gmail.com>
  * @package Source\Support

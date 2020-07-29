@@ -1,11 +1,12 @@
 {
-  "name": "rafaelsoje/cafecontrol",
+  "name": "upinside/fsphp",
   "description": "Formação Full Stack PHP Developer",
   "minimum-stability": "stable",
   "authors": [
     {
-      "name": "Rafael Soje",
-      "email": "rafaelsoje@gmail.com",
+      "name": "Robson V. Leite",
+      "email": "cursos@upinside.com.br",
+      "homepage": "https://www.upinside.com.br",
       "role": "Developer"
     }
   ],
@@ -29,6 +30,7 @@
     "coffeecode/uploader": "^1.0",
     "coffeecode/cropper": "^1.0",
     "coffeecode/optimizer": "^1.0",
-    "coffeecode/paginator": "^1.0"
+    "coffeecode/paginator": "^1.0",
+    "coffeecode/router": "^1.0"
   }
 }

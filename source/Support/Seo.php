@@ -5,7 +5,7 @@ namespace Source\Support;
 use CoffeeCode\Optimizer\Optimizer;
 
 /**
- *Class Seo
+ * Class Seo
  *
  * @author Rafael Soje <rafaelsoje@gmail.com>
  * @package Source\Support

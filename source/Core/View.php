@@ -5,7 +5,7 @@ namespace Source\Core;
 use League\Plates\Engine;
 
 /**
- *Class View
+ * Class View
  *
  * @author Rafael Soje <rafaelsoje@gmail.com>
  * @package Source\Core

@@ -5,7 +5,7 @@ namespace Source\Support;
 use CoffeeCode\Cropper\Cropper;
 
 /**
- *Class Thumb
+ * Class Thumb
  *
  * @author Rafael Soje <rafaelsoje@gmail.com>
  * @package Source\Support
