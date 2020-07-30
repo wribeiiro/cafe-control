@@ -62,6 +62,10 @@ class Web extends Controller
 		]);
 	}
 	
+	/**
+	 * SITE BLOG
+	 * @param array|null $data
+	 */
 	public function blog(?array $data): void
 	{
 		$head = $this->seo->render(
@@ -80,6 +84,10 @@ class Web extends Controller
 		]);
 	}
 	
+	/**
+	 * BLOG POST
+	 * @param array $data
+	 */
 	public function blogPost(array $data): void
 	{
 		$postName = $data['postName'];
@@ -97,6 +105,96 @@ class Web extends Controller
 		]);
 	}
 	
+	/**
+	 * SITE LOGIN
+	 */
+	public function login()
+	{
+		$head = $this->seo->render(
+			"Entrar - " . CONF_SITE_TITLE,
+			CONF_SITE_DESC,
+			url("/entrar"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("auth-login", [
+			"head" => $head,
+		]);
+	}
+	
+	/**
+	 * SITE FORGET
+	 */
+	public function forget(): void
+	{
+		$head = $this->seo->render(
+			"Recuperar Senha - " . CONF_SITE_TITLE,
+			CONF_SITE_DESC,
+			url("/recuperar"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("auth-forget", [
+			"head" => $head,
+		]);
+	
+	}
+	
+	/**
+	 * SITE REGISTER
+	 */
+	public function register(): void
+	{
+		$head = $this->seo->render(
+			"Criar Conta - " . CONF_SITE_TITLE,
+			CONF_SITE_DESC,
+			url("/cadastrar"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("auth-register", [
+			"head" => $head,
+		]);
+	
+	}
+	
+	/**
+	 * SITE OPTIN CONFIRM
+	 */
+	public function confirm(): void
+	{
+		$head = $this->seo->render(
+			"Confirme seu Cadastro - " . CONF_SITE_TITLE,
+			CONF_SITE_DESC,
+			url("/confirma"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("optin-confirm", [
+			"head" => $head,
+		]);
+	}
+	
+	/**
+	 * SITE OPTIN SUCCESS
+	 */
+	public function success(): void
+	{
+		$head = $this->seo->render(
+			"Bem vindo(a) ao " . CONF_SITE_TITLE,
+			CONF_SITE_DESC,
+			url("/obrigado"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("optin-success", [
+			"head" => $head,
+		]);
+	}
+	
+	/**
+	 * SITE TERMS
+	 */
 	public function terms():void
 	{
 		$head = $this->seo->render(
