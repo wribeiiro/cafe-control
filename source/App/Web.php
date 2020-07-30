@@ -10,6 +10,7 @@ namespace Source\App;
 
 
 use Source\Core\Controller;
+use Source\Support\Pager;
 
 /**
  * Web Controller
@@ -40,6 +41,73 @@ class Web extends Controller
 		echo $this->view->render("home", [
 			"head" => $head,
 			"video" => "lDZGl9Wdc7Y"
+		]);
+	}
+	
+	/**
+	 * SITE ABOUT
+	 */
+	public function about(): void
+	{
+		$head = $this->seo->render(
+			"Descubra o ". CONF_SITE_TITLE . " - " . CONF_SITE_DESC,
+			CONF_SITE_DESC,
+			url("/sobre"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("about", [
+			"head" => $head,
+			"video" => "lDZGl9Wdc7Y"
+		]);
+	}
+	
+	public function blog(?array $data): void
+	{
+		$head = $this->seo->render(
+			"Blog - ". CONF_SITE_NAME,
+			"Confira em nosso blog dicas de como controlar e melhorar suas contas. Vamos toamr um café?",
+			url("/blog"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		$pager = new Pager(url("/blog/page/"));
+		$pager->pager(100, 10, ($data['page'] ?? 1));
+		
+		echo $this->view->render("blog", [
+			"head" => $head,
+			"paginator" => $pager->render()
+		]);
+	}
+	
+	public function blogPost(array $data): void
+	{
+		$postName = $data['postName'];
+		
+		$head = $this->seo->render(
+			"POST NAME - ". CONF_SITE_NAME,
+			"POST HEADLINE",
+			url("/blog/{$postName}"),
+			theme("BLOG IMAGE")
+		);
+		
+		echo $this->view->render("blog-post", [
+			"head" => $head,
+			"data" => $this->seo->data()
+		]);
+	}
+	
+	public function terms():void
+	{
+		$head = $this->seo->render(
+		CONF_SITE_NAME . "- Termos de uso",
+			CONF_SITE_DESC,
+			url("/termos"),
+			theme("/assets/imagens/share.jpg")
+		);
+		
+		echo $this->view->render("terms", [
+			"head" => $head
 		]);
 	}
 	
