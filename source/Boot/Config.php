@@ -22,6 +22,13 @@ define("CONF_SITE_TITLE", "Gerencie suas contas com o melhor café");
 define("CONF_SITE_DESC", "O Cafecontrol é um gerenciador de contas simples, poderoso e gratuito. O prazer de tomar um café e o controle de suas contas.");
 define("CONF_SITE_LANG", "pt_BR");
 define("CONF_SITE_DOMAIN", "upinside.com.br");
+define("CONF_SITE_ADDR_STREET", "");
+define("CONF_SITE_ADDR_NUMBER", "");
+define("CONF_SITE_ADDR_COMPLEMENT", "");
+define("CONF_SITE_ADDR_CITY", "");
+define("CONF_SITE_ADDR_STATE", "");
+define("CONF_SITE_ADDR_ZIPCODE", "");
+
 
 /**
  * SOCIAL
@@ -87,8 +94,8 @@ define("CONF_IMAGE_QUALITY", ["jpg" => 75, "png" => 5]);
 define("CONF_MAIL_HOST", "smtp.sendgrid.net");
 define("CONF_MAIL_PORT", "587");
 define("CONF_MAIL_USER", "apikey");
-define("CONF_MAIL_PASS", "**************************");
-define("CONF_MAIL_SENDER", ["name" => "Robson V. Leite", "address" => "cursos@upinside.com.br"]);
+define("CONF_MAIL_PASS", "rafa130902");
+define("CONF_MAIL_SENDER", ["name" => "Rafael Soje", "address" => "rafaelsoje@gmail.com"]);
 define("CONF_MAIL_SUPPORT", "cursos@upinside.com.br");
 define("CONF_MAIL_OPTION_LANG", "br");
 define("CONF_MAIL_OPTION_HTML", true);
