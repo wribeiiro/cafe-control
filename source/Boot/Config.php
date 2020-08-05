@@ -70,8 +70,10 @@ define("CONF_MESSAGE_ERROR", "error icon-warning");
  * VIEW
  */
 define("CONF_VIEW_PATH", __DIR__ . "/../../shared/views");
-define("CONF_VIEW_THEME", "cafeweb");
 define("CONF_VIEW_EXT", "php");
+define("CONF_VIEW_THEME", "cafeweb");
+define("CONF_VIEW_APP", "cafeapp");
+
 
 /**
  * UPLOAD
