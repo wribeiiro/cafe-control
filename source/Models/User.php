@@ -5,9 +5,9 @@ namespace Source\Models;
 use Source\Core\Model;
 
 /**
- * Class User Active Record Pattern
+ * FSPHP | Class User Active Record Pattern
  *
- * @author Rafael Soje <rafaelsoje@gmail.com>
+ * @author Robson V. Leite <cursos@upinside.com.br>
  * @package Source\Models
  */
 class User extends Model
@@ -17,9 +17,7 @@ class User extends Model
      */
     public function __construct()
     {
-        parent::__construct(
-            "users", ["id"], ["first_name", "last_name", "email", "password"]
-        );
+        parent::__construct("users", ["id"], ["first_name", "last_name", "email", "password"]);
     }
 
     /**
@@ -52,10 +50,10 @@ class User extends Model
      */
     public function findByEmail(string $email, string $columns = "*"): ?User
     {
-    	$find = $this->find("email = :email", "email={$email}", $columns);
+        $find = $this->find("email = :email", "email={$email}", $columns);
         return $find->fetch();
     }
-    
+
     /**
      * @return bool
      */

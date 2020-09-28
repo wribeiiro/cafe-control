@@ -5,9 +5,9 @@ namespace Source\Core;
 use Source\Support\Message;
 
 /**
- * Class Model Layer Supertype Pattern
+ * FSPHP | Class Model Layer Supertype Pattern
  *
- * @author Rafael Soje <rafaelsoje@gmail.com>
+ * @author Robson V. Leite <cursos@upinside.com.br>
  * @package Source\Models
  */
 abstract class Model
@@ -20,20 +20,20 @@ abstract class Model
 
     /** @var Message|null */
     protected $message;
-	
-	/** @var string */
+
+    /** @var string */
     protected $query;
-	
-	/** @var string */
+
+    /** @var string */
     protected $params;
-	
-	/** @var string */
+
+    /** @var string */
     protected $order;
-	
-	/** @var int */
+
+    /** @var int */
     protected $limit;
-	
-	/** @var int */
+
+    /** @var int */
     protected $offset;
 
     /** @var string $entity database table */
@@ -114,110 +114,107 @@ abstract class Model
     {
         return $this->message;
     }
-	
-	
-	/**
-	 * @param null|string $terms
-	 * @param null|string $params
-	 * @param string $columns
-	 * @return Model|mixed
-	 */
-	public function find(?string $terms = null, ?string $params = null, string $columns = "*")
-	{
-		if($terms){
-			$this->query = "SELECT {$columns} FROM " . static::$entity. " WHERE {$terms}";
-			parse_str($params, $this->params);
-			return $this;
-		}
-		$this->query = "SELECT {$columns} FROM " . static::$entity;
-		return $this;
+
+    /**
+     * @param null|string $terms
+     * @param null|string $params
+     * @param string $columns
+     * @return Model|mixed
+     */
+    public function find(?string $terms = null, ?string $params = null, string $columns = "*")
+    {
+        if ($terms) {
+            $this->query = "SELECT {$columns} FROM " . static::$entity . " WHERE {$terms}";
+            parse_str($params, $this->params);
+            return $this;
+        }
+
+        $this->query = "SELECT {$columns} FROM " . static::$entity;
+        return $this;
     }
-	
-	/**
-	 * @param int $id
-	 * @param string $columns
-	 * @return null|Model|mixed
-	 */
-	public function findById(int $id, string $columns = "*"): ?Model
-	{
-		$find = $this->find("id = :id", "id={$id}", $columns);
-		return $find->fetch();
-	}
-	
-	/**
-	 * @param string $colimnOrder
-	 * @return Model
-	 */
-	public function order(string $colimnOrder): Model
-	{
-		$this->order = " ORDER BY {$colimnOrder}";
-		return $this;
+
+    /**
+     * @param int $id
+     * @param string $columns
+     * @return null|mixed|Model
+     */
+    public function findById(int $id, string $columns = "*"): ?Model
+    {
+        $find = $this->find("id = :id", "id={$id}", $columns);
+        return $find->fetch();
     }
-	
-	
-	/**
-	 * @param int $limit
-	 * @return Model
-	 */
-	public function limit(int $limit): Model
-	{
-		$this->limit = " LIMIT {$limit}";
-		return $this;
+
+    /**
+     * @param string $columnOrder
+     * @return Model
+     */
+    public function order(string $columnOrder): Model
+    {
+        $this->order = " ORDER BY {$columnOrder}";
+        return $this;
     }
-	
-	/**
-	 * @param int $offset
-	 * @return Model
-	 */
-	public function offset(int $offset): Model
-	{
-		$this->offset = " OFFSET {$offset}";
-		return $this;
+
+    /**
+     * @param int $limit
+     * @return Model
+     */
+    public function limit(int $limit): Model
+    {
+        $this->limit = " LIMIT {$limit}";
+        return $this;
     }
-	
-	/**
-	 * @param bool $all
-	 * @return null|array|mixed|Model
-	 */
-	public function fetch(bool $all = false)
-	{
-		try{
-			$stmt = Connect::getInstance()->prepare($this->query . $this->order . $this->limit . $this->offset);
-			$stmt->execute($this->params);
-			
-			if(!$stmt->rowCount()){
-				return null;
-			}
-			
-			if($all){
-				return $stmt->fetchAll(\PDO::FETCH_CLASS, static::class);
-			}
-			
-			return $stmt->fetchObject(static::class);
-			
-		}catch (\PDOException $exception){
-			$this->fail = $exception;
-			return null;
-		}
+
+    /**
+     * @param int $offset
+     * @return Model
+     */
+    public function offset(int $offset): Model
+    {
+        $this->offset = " OFFSET {$offset}";
+        return $this;
     }
-	
-	/**
-	 * @param string $key
-	 * @return int
-	 */
-	public function count(string $key = "id"): int
-	{
-		$stmt = Connect::getInstance()->prepare($this->query);
-		$stmt->execute($this->params);
-		return $stmt->rowCount();
+
+    /**
+     * @param bool $all
+     * @return null|array|mixed|Model
+     */
+    public function fetch(bool $all = false)
+    {
+        try {
+            $stmt = Connect::getInstance()->prepare($this->query . $this->order . $this->limit . $this->offset);
+            $stmt->execute($this->params);
+
+            if (!$stmt->rowCount()) {
+                return null;
+            }
+
+            if ($all) {
+                return $stmt->fetchAll(\PDO::FETCH_CLASS, static::class);
+            }
+
+            return $stmt->fetchObject(static::class);
+        } catch (\PDOException $exception) {
+            $this->fail = $exception;
+            return null;
+        }
     }
-	
-	
-	/**
-	 * @param array $data
-	 * @return int|null
-	 */
-	protected function create(array $data): ?int
+
+    /**
+     * @param string $key
+     * @return int
+     */
+    public function count(string $key = "id"): int
+    {
+        $stmt = Connect::getInstance()->prepare($this->query);
+        $stmt->execute($this->params);
+        return $stmt->rowCount();
+    }
+
+    /**
+     * @param array $data
+     * @return int|null
+     */
+    protected function create(array $data): ?int
     {
         try {
             $columns = implode(", ", array_keys($data));
@@ -232,15 +229,14 @@ abstract class Model
             return null;
         }
     }
-	
-	
-	/**
-	 * @param array $data
-	 * @param string $terms
-	 * @param string $params
-	 * @return int|null
-	 */
-	protected function update(array $data, string $terms, string $params): ?int
+
+    /**
+     * @param array $data
+     * @param string $terms
+     * @param string $params
+     * @return int|null
+     */
+    protected function update(array $data, string $terms, string $params): ?int
     {
         try {
             $dateSet = [];
@@ -258,21 +254,19 @@ abstract class Model
             return null;
         }
     }
-	
-	
-	/**
-	 * @param string $key
-	 * @param string $value
-	 * @return bool
-	 */
-	public function delete(string $key, string $value): bool
+
+    /**
+     * @param string $key
+     * @param string $value
+     * @return bool
+     */
+    public function delete(string $key, string $value): bool
     {
         try {
             $stmt = Connect::getInstance()->prepare("DELETE FROM " . static::$entity . " WHERE {$key} = :key");
             $stmt->bindValue("key", $value, \PDO::PARAM_STR);
             $stmt->execute();
             return true;
-            
         } catch (\PDOException $exception) {
             $this->fail = $exception;
             return false;

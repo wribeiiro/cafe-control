@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+        <meta name="mit" content="2019-09-04T04:10:28-03:00+28440">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <?= $head; ?>
